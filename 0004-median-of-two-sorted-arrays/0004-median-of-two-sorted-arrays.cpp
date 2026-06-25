@@ -6,30 +6,43 @@ using namespace std;
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        // 1. Merge the two arrays into one
-    vector<double> merged;
-    merged.reserve(nums1.size() + nums2.size()); // Pre-allocate memory for efficiency
-    merged.insert(merged.end(), nums1.begin(), nums1.end());
-    merged.insert(merged.end(), nums2.begin(), nums2.end());
-
-    // 2. Sort the merged array in ascending order
-    sort(merged.begin(), merged.end());
-
-    // 3. Count the number of values
-    int n = merged.size();
-
-    // Edge case: if both arrays are empty
-    if (n == 0) {
-        return 0.0; 
+    // We always want to run binary search on the smaller array for efficiency.
+    if (nums1.size() > nums2.size()) {
+        return findMedianSortedArrays(nums2, nums1);
     }
 
-    // 4. Use an if-else statement to find and return the median
-    if (n % 2 == 0) {
-        // If the count is even, the median is the average of the two middle elements
-        return (merged[n / 2 - 1] + merged[n / 2]) / 2.0;
-    } else {
-        // If the count is odd, the median is the exact middle element
-        return merged[n / 2];
+    int x = nums1.size();
+    int y = nums2.size();
+    int low = 0, high = x;
+
+    while (low <= high) {
+        int partitionX = (low + high) / 2;
+        int partitionY = (x + y + 1) / 2 - partitionX;
+
+        // If partition is 0, there is nothing on the left side. Use -infinity.
+        double maxLeftX = (partitionX == 0) ? -1e9 : nums1[partitionX - 1];
+        double minRightX = (partitionX == x) ? 1e9 : nums1[partitionX];
+
+        double maxLeftY = (partitionY == 0) ? -1e9 : nums2[partitionY - 1];
+        double minRightY = (partitionY == y) ? 1e9 : nums2[partitionY];
+
+        // Check if we found the perfect split
+        if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+            if ((x + y) % 2 == 0) {
+                return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2.0;
+            } else {
+                return max(maxLeftX, maxLeftY);
+            }
+        } 
+        // We are too far on the right side of nums1. Move left.
+        else if (maxLeftX > minRightY) {
+            high = partitionX - 1;
+        } 
+        // We are too far on the left side of nums1. Move right.
+        else {
+            low = partitionX + 1;
+        }
     }
-}
+    return 0.0; // Fallback
+    }
 };
