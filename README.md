@@ -8,6 +8,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Two Pointers
 |  |
 | ------- |
+| [0005-longest-palindromic-substring](https://github.com/abdulhadi19306v10-oss/MyLeetcodeSolutions/tree/master/0005-longest-palindromic-substring) |
 | [0011-container-with-most-water](https://github.com/abdulhadi19306v10-oss/MyLeetcodeSolutions/tree/master/0011-container-with-most-water) |
 ## Greedy
 |  |
@@ -25,5 +26,10 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## String
 |  |
 | ------- |
+| [0005-longest-palindromic-substring](https://github.com/abdulhadi19306v10-oss/MyLeetcodeSolutions/tree/master/0005-longest-palindromic-substring) |
 | [0012-integer-to-roman](https://github.com/abdulhadi19306v10-oss/MyLeetcodeSolutions/tree/master/0012-integer-to-roman) |
+## Dynamic Programming
+|  |
+| ------- |
+| [0005-longest-palindromic-substring](https://github.com/abdulhadi19306v10-oss/MyLeetcodeSolutions/tree/master/0005-longest-palindromic-substring) |
 <!---LeetCode Topics End-->
